@@ -1,0 +1,44 @@
+---
+import type { ProductMetaTagsDto } from "../types/dtos/ProductMetaTags.dto";
+import type { ProductPropertiesDto } from "../types/dtos/ProductProperties.dto";
+import ProductMetaTags from "../components/ProductMetaTags/ProductMetaTags.astro";
+import Navigation from "../components/Navigation/Navigation.astro";
+import Typography from "../components/Typography/Typography.astro";
+
+import "../styles/global.css";
+
+// props
+const { productProperties } = Astro.props as ProductPropertiesDto;
+
+const metaTags: ProductMetaTagsDto = {
+  metaTags: {
+    title: productProperties.title,
+    robots: productProperties.robots,
+  }
+};
+
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/webp" href="/favicon.webp">
+  <Typography/>
+  <ProductMetaTags metaTags={metaTags} />
+  
+</head>
+<body>
+  <Navigation/>
+  <slot/>
+</body>
+</html>
+
+
+<style>
+  body{
+    font-family: 'Inter Roman', sans-serif;
+  }
+</style>
+

@@ -1,0 +1,8 @@
+---
+import type { ProductMetaTagsDto } from '../../types/dtos/ProductMetaTags.dto';
+
+const { metaTags } = Astro.props as ProductMetaTagsDto;
+---
+
+<meta name="robots" content={metaTags.robots} />
+<title>{metaTags.title}</title>

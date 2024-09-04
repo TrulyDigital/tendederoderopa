@@ -1,0 +1,312 @@
+---
+import { type NavigationMenuDto } from '../../types/dtos/NavigationMenu.dto';
+import { type NetworkMenuDto } from '../../types/dtos/NetworkMenu.dto';
+
+// img logo
+const logoSrc: string = '/imagenes/logo/logo.webp';
+const logoAlt: string = 'Logo de TendederoDeRopa.shop';
+
+// img menu desplegable
+const arrowDownSrc: string = '/imagenes/navegacion/teclado-flecha-abajo.webp';
+const arrowDownAlt: string = 'Menú desplegable'; 
+
+// botón buscar
+const searchButtonSrc: string = '/imagenes/navegacion/buscar.webp';
+const searchButtonAlt: string = 'Buscar cualqueir contenido';
+
+// botón lateral para móviles
+const mobileButtonSrc: string = '/imagenes/navegacion/menu.webp';
+const mobileButtonAlt: string = 'Menú de navegación para dispositivos móviles';
+
+// botón lateral para móviles Cerrar
+const mobileCloseButtonSrc: string = '/imagenes/navegacion/cerrar-menu.webp';
+const mobileCloseButtonAlt: string = 'Cerrar menú de navegación para dispositivos móviles';
+
+// menu data
+const nav: NavigationMenuDto = {
+  menu: [
+    {
+      text: 'Plegables',
+      subMenuItem: [
+        {
+          text: 'Plegables',
+          desc: 'Los modelos más populares de tendederos plegables.',
+          iconSrc: '/imagenes/navegacion/plegable.webp',
+          iconAlt: 'Tendedero de ropa plegable',
+          href: '/tendedero-de-ropa-plegable/',
+        },
+        {
+          text: 'Para piso',
+          desc: 'Generalmente para espacios pequeños y apartamentos.',
+          iconSrc: '/imagenes/navegacion/para-piso.webp',
+          iconAlt: 'Tendedero de ropa plegable de piso',
+          href: '/tendedero-de-ropa-plegable/tendedero-de-ropa-plegable-de-piso/',
+        },
+        {
+          text: 'Para paredes',
+          desc: 'Seguros, fáciles de instalar y muy resistentes.',
+          iconSrc: '/imagenes/navegacion/para-pared.webp',
+          iconAlt: 'Tendedero plegable de pared',
+          href: '/tendedero-de-ropa-plegable/tendederos-de-pared/',
+        },
+        {
+          text: 'En aluminio',
+          desc: 'Tendederos plegables en material de aluminio.',
+          iconSrc: '/imagenes/navegacion/aluminio.webp',
+          iconAlt: 'Tendederos de aluminio plegable',
+          href: '/',
+        },
+        {
+          text: 'Por niveles',
+          desc: 'Encuentra diferentes niveles en tu tendedero plegable.',
+          iconSrc: '/imagenes/navegacion/por-niveles.webp',
+          iconAlt: 'Tendederos plegables por niveles',
+          href: '/',
+        },
+        {
+          text: 'Metálicos',
+          desc: 'Tendederos plegables en material de metal.',
+          iconSrc: '/imagenes/navegacion/metalico.webp',
+          iconAlt: 'Tendederos plegables por niveles',
+          href: '/',
+        },
+        {
+          text: 'En Acero',
+          desc: 'Acero inoxidable para una larga durabilidad.',
+          iconSrc: '/imagenes/navegacion/acero.webp',
+          iconAlt: 'Tendedero plegable en Acero Inoxidable',
+          href: '/',
+        },
+        {
+          text: 'En Madera',
+          desc: 'Diseños increibles en madera para tu tendedero.',
+          iconSrc: '/imagenes/navegacion/madera.webp',
+          iconAlt: 'Tendedero de madera plegable.',
+          href: '/',
+        }
+      ]
+    },
+    {
+      text: 'Por Ubicación',
+      subMenuItem: [
+        {
+          text: 'Para Apartamentos',
+          desc: 'Optimiza tu espacio y guardalo fácilmente.',
+          iconSrc: '/imagenes/navegacion/apartamento.webp',
+          iconAlt: 'Tendedero de ropa para apartamento',
+          href: '/',
+        },
+        {
+          text: 'Para patios',
+          desc: 'Tendederos al aire libre de diferentes diseños.',
+          iconSrc: '/imagenes/navegacion/para-patios.webp',
+          iconAlt: 'Tendederos de ropa para patio',
+          href: '/',
+        }
+      ]
+    }
+  ]
+};
+
+// network menu data
+const networks: NetworkMenuDto[] = [
+  {
+    iconSrc: '/imagenes/navegacion/tiktok.webp',
+    iconAlt: 'Tiktok de la tienda TendederoDeRopa.shop.',
+    tooltipText: 'Tiktok',
+    href: '/',
+  },
+  {
+    iconSrc: '/imagenes/navegacion/instagram.webp',
+    iconAlt: 'Instagram de la tienda TendederoDeRopa.shop.',
+    tooltipText: 'Instagram',
+    href: '/',
+  },
+];
+
+---
+
+<nav class="_nav">
+
+  <!-- Navigation Box -->
+  <div class="_nav_box">
+
+    <!-- Navigation Logo -->
+    <div class="_nav_logo">
+      <a href="/">
+        <img src={logoSrc} alt={logoAlt} />
+      </a>
+    </div>
+
+    <!-- Navigation Menu -->
+    <div class="_nav_menu">
+      <ul>
+        {
+          nav.menu.map(menuItem => (
+            // Menu Item
+            <li class="_nav_menu_item group">
+              <div>
+                <span class="group-hover:text-yellow-700">
+                  {menuItem.text}
+                </span>
+                <img class="group-hover:-rotate-90" src={arrowDownSrc} alt={arrowDownAlt} />
+              </div>
+              <div class:list={[ // Sub Menu Box 1 Col o Box Grid 2 Cols
+                'group-hover:visible group-hover:opacity-100',
+                {
+                  '_nav_sub_menu_box_1_col': menuItem.subMenuItem.length <= 4,
+                },
+                {
+                  '_nav_sub_menu_box_2_col': menuItem.subMenuItem.length > 4,
+                }
+              ]}>
+                <ul class:list={[
+                  {
+                    '_nav_sub_menu_1_col' : menuItem.subMenuItem.length <= 4,
+                  },
+                  {
+                    '_nav_sub_menu_2_col' : menuItem.subMenuItem.length > 4,
+                  }
+                ]}>
+                  {
+                    menuItem.subMenuItem.map(subMenuItem => (
+                      // Sub Menu Item
+                      <li class="_nav_sub_menu_item">
+                        <a href={subMenuItem.href}>
+                          <img src={subMenuItem.iconSrc} alt={subMenuItem.iconAlt} />
+                          <span>
+                            <span>
+                              {subMenuItem.text}
+                            </span>
+                            <span>
+                              {subMenuItem.desc}
+                            </span>
+                          </span>
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Navigation Extras -->
+    <div class="_nav_net">
+      {
+        networks.map(network => (
+          // network
+          <a class="_nav_net_social group" href={network.href} >
+            {/* icon */}
+            <img src={network.iconSrc} alt={network.iconAlt} />
+            {/* tooltip */}
+            <span class="group-hover:visible group-hover:opacity-100">
+              {network.tooltipText} 
+            </span>
+          </a>
+        ))
+      }
+      <!-- Nav Networks Search -->
+      <button class="_nav_net_search group">
+        <!-- icon -->
+        <img src={searchButtonSrc} alt={searchButtonAlt} />
+        <!-- tooltip -->
+        <span class="group-hover:visible group-hover:opacity-100"> 
+          Buscar
+        </span>
+      </button>
+      <!-- Nav Networks Contact -->
+      <a class="_nav_net_contact" href="/"> 
+        Contáctanos 
+      </a>
+      <!-- Nav Networks Mobile Button -->
+      <button id="idOpenMenuMobile" class="_nav_mobile_button">
+        <img src={mobileButtonSrc} alt={mobileButtonAlt} />
+      </button>
+    </div>
+  </div>
+
+  <!-- SideNav -->
+  <div id="idSideNav" class="_sidenav">
+    <!-- SideNav Close -->
+    <div class="_sidenav_close">
+      <div>
+        <button id="idCloseMenuMobile">
+          <img src={mobileCloseButtonSrc} alt={mobileCloseButtonAlt}>
+        </button>
+      </div>
+    </div>
+    <!-- SideNav Menu -->
+    <ul class="_sidenav_menu">
+      {
+        nav.menu.map((menuItem, index) => (
+          // SideNav Menu Item
+          <li class="_sidenav_menu_item">
+            <button id={`idSideNavSubMenuButton${index}`}>
+              <span>
+                {menuItem.text}
+              </span>
+              <img src={arrowDownSrc} alt={arrowDownAlt} />
+            </button>
+            {/* SideNav Sub Menu Box */}
+            <div id={`idSideNavSubMenuBox${index}`} class="_sidenav_sub_menu_box">
+              <ul>
+                {
+                  menuItem.subMenuItem.map(subMenuItem => (
+                    // SideNav Sub Menu Item
+                    <li class="_sidenav_sub_menu_item">
+                      <a href={subMenuItem.href}>
+                        <img src={subMenuItem.iconSrc} alt={subMenuItem.iconAlt} />
+                        <span>
+                          <span>
+                            {subMenuItem.text}
+                          </span>
+                          <span>
+                            {subMenuItem.desc}
+                          </span>
+                        </span>
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+    <!-- SideNav Extras and Logo -->
+    <section class="_sidenav_extras_and_logo">
+      <!-- SideNav Logo -->
+      <div class="_sidenav_logo">
+        <a href="/">
+          <img src={logoSrc} alt={logoAlt} />
+        </a>
+      </div>
+      <span class="mt-1">Tienda Virtual 🛒</span>
+      <!-- SideNav Contact -->
+      <a class="_sidenav_contact" href="/"> 
+        Contáctanos 
+      </a>
+      <span class="mt-2">Conoce nuestros servicios 🧑‍💻</span>
+      <!-- SideNav Networks -->
+      <div class="_sidenav_networks">
+        {
+          networks.map(network => (
+            <a href={network.href}>
+              <img src={network.iconSrc} alt={network.iconAlt} />
+            </a>
+          ))
+        }
+      </div>
+      <span class="mt-2">Siguenos en nuestras redes! 👀🙏</span>
+    </section>
+  </div>
+
+</nav>
+<script src="./Navigation.ts"></script>
+
+

@@ -1,0 +1,135 @@
+/* SideNav */
+._sidenav {
+  @apply
+  w-0 fixed top-0 right-0 h-screen z-50 bg-white shadow-2xl
+  border-l-gray-300 border-l flex flex-col overflow-auto
+  transition-all duration-500 ease-in-out items-center;
+}
+
+/* SideNav Close */
+
+._sidenav_close {
+  @apply
+  h-16 flex flex-row items-center justify-center w-full;
+}
+
+._sidenav_close > div {
+  @apply
+  grid items-stretch w-11/12 h-16;
+}
+
+._sidenav_close > div > button {
+  @apply
+  justify-self-end self-center h-9 w-9 bg-yellow-400 rounded-lg flex 
+  justify-center items-center hover:bg-yellow-300;
+}
+
+._sidenav_close > div > button > img {
+  @apply
+  w-6;
+}
+
+/* SideNav Menu */
+
+._sidenav_menu {
+  @apply
+  pr-4 pl-4 w-full md:w-fit;
+}
+
+/* SideNav Menu Item */
+
+._sidenav_menu_item > button {
+  @apply
+  flex flex-row items-center justify-between w-full mt-6 border-b
+  border-pink-300;
+}
+
+._sidenav_menu_item > button > span {
+  @apply
+  pb-3;
+}
+
+._sidenav_menu_item > button > img {
+  @apply
+  pb-3 transform transition-transform duration-300;
+}
+
+/* SideNav Sub Menu Box */
+
+._sidenav_sub_menu_box {
+  @apply
+  invisible max-h-0 opacity-0 transition ease-in duration-300;
+}
+
+/* SideNav Sub Menu Item */
+
+._sidenav_sub_menu_item {
+  @apply
+  pt-3 pb-3 border-b border-gray-200;
+}
+
+._sidenav_sub_menu_item > a {
+  @apply
+  flex flex-row items-center;
+}
+
+._sidenav_sub_menu_item > a > img {
+  @apply
+  w-6 h-6;
+}
+
+._sidenav_sub_menu_item > a > span {
+  @apply
+  flex flex-col ml-2;
+}
+
+._sidenav_sub_menu_item > a > span > span:nth-child(1){
+  @apply
+  font-bold text-lg;
+}
+
+._sidenav_sub_menu_item > a > span > span:nth-child(2) {
+  @apply
+  text-sm text-gray-700;
+}
+
+/* SideNav Extras and Logo */
+
+._sidenav_extras_and_logo {
+  @apply
+  flex flex-col justify-center items-center mt-52 
+  mb-20;
+}
+
+/* SideNav Logo */
+
+._sidenav_logo > a {
+  @apply
+  flex flex-row mt-3;
+}
+
+/* SideNav Contact */
+
+._sidenav_contact {
+  @apply
+  bg-yellow-400 rounded-md pt-2 pb-2 pl-2 pr-2 font-bold
+  hover:bg-yellow-300 transition duration-300 ease-in-out
+  mt-6 text-lg;
+}
+
+/* SideNav Networks */
+
+._sidenav_networks{
+  @apply
+  flex flex-row mt-6;
+}
+
+._sidenav_networks > a {
+  @apply
+  p-2;
+}
+
+._sidenav_networks > a > img {
+  @apply
+  w-8 h-8;
+}

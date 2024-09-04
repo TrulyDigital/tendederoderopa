@@ -1,0 +1,19 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import type { PageMetaTagsDto } from "../../types/dtos/PageMetaTags.dto";
+
+const pageMetaTags: PageMetaTagsDto = {
+	metaTags: {
+		title: "TendederoDeRopa",
+		description: "Tienda virtual de productos de tendederos de ropa",
+		keywords: "Tendedero, tendedero de ropa, tendederos de ropa modernos, tendederos para ropa, extendedor de ropa",
+		robots: "index, follow",
+		canonical: "https://tendederoderopa.shop/tendedero-de-ropa-plegable/",
+	}
+}
+
+---
+
+<PageLayout metaTags={pageMetaTags.metaTags}>
+  <h1>Hola Tendederos de pared</h1>
+</PageLayout>

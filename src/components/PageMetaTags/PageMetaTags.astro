@@ -1,0 +1,22 @@
+---
+import type { PageMetaTagsDto } from '../../types/dtos/PageMetaTags.dto';
+
+interface Props {
+  metaTags: {
+    title: string;
+    description: string;
+    keywords: string;
+    robots: string;
+    canonical: string;
+  }
+}
+
+const { metaTags } = Astro.props as PageMetaTagsDto;
+---
+
+<meta name="description" content={metaTags.description} />
+<meta name="keywords" content={metaTags.keywords} />
+<meta name="robots" content={metaTags.robots} />
+<link rel="canonical" href={metaTags.canonical}>
+<title>{metaTags.title}</title>
+

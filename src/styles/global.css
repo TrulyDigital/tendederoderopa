@@ -1,0 +1,8 @@
+@import '../components/Navigation/Navigation.css';
+@import '../components/Navigation/SideNav.css';
+@import 'product.css';
+
+/* src/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

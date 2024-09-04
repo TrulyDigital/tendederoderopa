@@ -1,0 +1,224 @@
+---
+import ProductLayout from "../../../layouts/ProductLayout.astro";
+import type { ProductPropertiesDto } from "../../../types/dtos/ProductProperties.dto";
+
+export const productPropertiesDto: ProductPropertiesDto = {
+  productProperties: {
+    asin: 'B0BK4M1BTX',
+    title: 'Tendedero de ropa plegable.',
+    description: 'Uno de los mejores y más queridos productos de nuestros clientes.',
+    pubDate: '2024-08-27',
+    amazon: {
+      realUrl: 'https://www.amazon.com/JOOM-Portable-Foldable-Invisible-Household/dp/B0BK4M1BTX/ref=sr_1_1_sspa?crid=1O77SB2Z8IVNJ&dib=eyJ2IjoiMSJ9.M-27a0oimmgzZlKF7ooV2T8OpXef2Oe9CcZ2A_qkhxB4vph0GBIDrFiucb_Qz3-ROIGS3mwAS4RIaQfEuVKdKU8qZWqduXM4He4rm8cLLj2cA9-uGFdpoVhkwzx8XANyQthLqYhflb7ev0WW0mPJzatg1WU0hovSbwKhqw-wzdw59Ox3dbzE_MGuoySmkAc3JtJURUu8LqND-3UwqD3xuOPM1Sov-EEe_TzFj28r8j00uKHk-m2uk9QBHkapHcDv2oloIqqz0UOx5Zg3q4oLFYMnQtzIq35bxd3EVjcRNYA.Dw-vXfycYfLm0sIex4GGZ3-0qsdnwm-YqX7nDEOlIYk&dib_tag=se&keywords=tendedero%2Bde%2Bropa&qid=1724732254&sprefix=tendedero%2Bde%2Bropa%2Caps%2C166&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1',
+      affiliateUrl: 'NA',
+      rating: 4.4,
+      price: 75,
+    },
+    robots: 'index follow',
+    nextButtonImg: '/imagenes/productos/slide/boton-siguiente.webp',
+    nextButtonImgAlt: 'Botón siguiente de la colección de imágenes',
+    prevButtonImg: '/imagenes/productos/slide/boton-anterior.webp',
+    prevButtonImgAlt: 'Botón anterior de la colección de imágenes',
+    starImg: '/imagenes/productos/comunes/estrella.webp',
+    starAlt: 'Estrella de calificación del producto',
+    imgHtmlSizes: '(max-width: 639px) 400px, (max-width: 1023px) 600px, (max-width: 1279px) 800px, 1200px',
+    basePathProductImg: '/imagenes/productos/plegables/',
+    figCaption: 'Tendal plegable Tripode de marca JOOM.',
+    productImgList: [
+      {
+        imgLarge: 'tendal-plegable-tripode-1200x1200-large.webp',
+        imgMedium: 'tendal-plegable-tripode-800x800-medium.webp',
+        imgSmall: 'tendal-plegable-tripode-600x600-small.webp',
+        imgAlt: 'Tendal plegable tripode de pie en el piso.',
+      },
+      {
+        imgLarge: 'tendal-plegable-tripode-detalle-1200x1200-large.webp',
+        imgMedium: 'tendal-plegable-tripode-detalle-800x800-medium.webp',
+        imgSmall: 'tendal-plegable-tripode-detalle-600x600-small.webp',
+        imgAlt: 'Detalles del tendal plegable tripode.',
+      },
+      {
+        imgLarge: 'tendal-plegable-tripode-medidas-1200x1200-large.webp',
+        imgMedium: 'tendal-plegable-tripode-medidas-800x800-medium.webp',
+        imgSmall: 'tendal-plegable-tripode-medidas-600x600-small.webp',
+        imgAlt: 'Medidas del tendal plegable tripode.',
+      },
+      {
+        imgLarge: 'tendal-plegable-tripode-uso-1200x1200-large.webp',
+        imgMedium: 'tendal-plegable-tripode-uso-800x800-medium.webp',
+        imgSmall: 'tendal-plegable-tripode-uso-600x600-small.webp',
+        imgAlt: 'Como usar un tendal plegable tripode.',
+      }
+    ],
+    productInformationList: [
+      {
+        key: 'Material',
+        value: 'Plastico',
+      },
+      {
+        key: 'Marca',
+        value: 'JOOM',
+      },
+      {
+        key: 'Color',
+        value: 'De madera',
+      },
+      {
+        key: 'Tipo de montaje',
+        value: 'Montaje de piso',
+      },
+      {
+        key: 'Peso Máximo',
+        value: '20 Libras',
+      },
+      {
+        key: 'Calificación',
+        value: '4.4',
+      }
+    ]
+  }
+};
+---
+
+<ProductLayout productProperties={productPropertiesDto.productProperties}>
+
+  <!-- Product Container -->
+  <section class="_product_container">
+
+    <!-- Article -->
+    <article class="_product">
+
+      <h1 class="_product_title">
+        Tendal plegable y portable ahorrador de espacio.
+      </h1>
+
+      <p class="text-sm mt-3 mb-3">
+        Uno de los productos mejor calificados por los usuarios, su estilo,
+        su fácil instalación, ahorrador de espacio 
+      </p>
+
+      <!-- Product Figure -->
+      <figure class="_product_figure">
+
+        <!-- Product Container Slider -->
+        <div class="_product_slider_container" id="idProductSliderContainer">
+          <!-- Product Slide Inner -->
+          <div class="_slider_inner" id="idSliderInner">
+            <!-- Product Slide Img -->
+            {
+              productPropertiesDto.productProperties.productImgList.map(imgItem => (
+                <div class="_image_slide">
+                  <img 
+                    src={productPropertiesDto.productProperties.basePathProductImg+imgItem.imgMedium}
+                    srcset=`${productPropertiesDto.productProperties.basePathProductImg+imgItem.imgSmall} 600w,
+                            ${productPropertiesDto.productProperties.basePathProductImg+imgItem.imgMedium} 800w,
+                            ${productPropertiesDto.productProperties.basePathProductImg+imgItem.imgLarge} 1200w` 
+                    sizes={productPropertiesDto.productProperties.imgHtmlSizes}
+                    alt={imgItem.imgAlt}
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Buttons' Slider Navigation -->
+        <div class="_slider_nav">
+          <button class="_slide_buttons _prev_button" id="idPrevButton">
+            <img 
+              src={productPropertiesDto.productProperties.prevButtonImg} 
+              alt={productPropertiesDto.productProperties.prevButtonImgAlt}
+            />
+          </button>
+          <!-- Dots Slider Container -->
+          <div class="_dots_slider_container">
+            {
+              productPropertiesDto.productProperties.productImgList.map(() => (
+                <div><div class="_dot_slider"></div></div>
+              ))
+            }
+          </div>
+          <button class="_slide_buttons _next_button" id="idNextButton">
+            <img 
+              src={productPropertiesDto.productProperties.nextButtonImg} 
+              alt={productPropertiesDto.productProperties.nextButtonImgAlt} 
+            />
+          </button>
+        </div>
+
+        <figcaption class="text-sm">
+          {productPropertiesDto.productProperties.figCaption}
+        </figcaption>
+
+      </figure>
+
+      <!-- Buy in Amazon -->
+      <a 
+        class="_product_buy_in_amazon"
+        href={productPropertiesDto.productProperties.amazon.realUrl}
+      >
+        Comprar en Amazon
+      </a>
+
+      <!-- Product Information -->
+      <h2 class="self-start font-bold mb-2 mt-6">
+        Información del Producto
+      </h2>
+      <table class="_product_information_table">
+        <tbody>
+          {
+            productPropertiesDto.productProperties.productInformationList.map(product => {
+              if(product.key.toLowerCase() === 'calificación'){
+                return(
+                  <tr class="_product_information_row">
+                    <td>{product.key}</td>
+                    <td class="_product_information_rating">
+                      {product.value}
+                      <img 
+                        src={productPropertiesDto.productProperties.starImg} 
+                        alt={productPropertiesDto.productProperties.starAlt}
+                      />
+                    </td>
+                  </tr>
+                )
+              }
+              else{
+                return(
+                  <tr class="_product_information_row">
+                    <td>{product.key}</td>
+                    <td>{product.value}</td>
+                  </tr>
+                )
+              }
+            })
+          }
+        </tbody>
+      </table>
+
+      <!-- -->
+      <figure>
+        <figcaption></figcaption>
+        {
+          productPropertiesDto.productProperties.productImgList.map(imgItem => (
+            <div>
+              <img 
+                src={productPropertiesDto.productProperties.basePathProductImg+imgItem.imgMedium}
+                srcset=`${productPropertiesDto.productProperties.basePathProductImg+imgItem.imgSmall} 600w,
+                        ${productPropertiesDto.productProperties.basePathProductImg+imgItem.imgMedium} 800w,
+                        ${productPropertiesDto.productProperties.basePathProductImg+imgItem.imgLarge} 1200w` 
+                sizes={productPropertiesDto.productProperties.imgHtmlSizes}
+                alt={imgItem.imgAlt}
+              />
+            </div>
+          ))
+        }
+      </figure>
+
+    </article>
+  </section>
+  <script src="../../../assets/ProductSlider.ts"></script>
+</ProductLayout>
+
+
+
+

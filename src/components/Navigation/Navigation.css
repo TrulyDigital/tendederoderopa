@@ -1,0 +1,190 @@
+/* Navigation.astro */
+
+._nav {
+  @apply 
+  flex items-center justify-center h-16;
+}
+
+/* Navigation Box */
+
+._nav_box{
+  @apply 
+  flex items-center justify-between w-11/12 2xl:w-3/4;
+}
+
+/* Navigation Logo */
+
+._nav_logo{
+  @apply 
+  flex-none;
+}
+
+._nav_logo > a {
+  @apply 
+  flex flex-row items-center;
+}
+
+._nav_logo > a > img {
+  @apply
+  w-20;
+}
+
+/* Navigation Menu */
+
+._nav_menu {
+  @apply 
+  hidden flex-none lg:block;
+}
+
+._nav_menu > ul {
+  @apply 
+  flex flex-row;
+}
+
+/* Menu Item */
+
+._nav_menu_item {
+  @apply 
+  flex flex-col items-center ml-12 cursor-pointer relative;
+}
+
+._nav_menu_item > div:nth-child(1) {
+  @apply
+  flex flex-row items-center;
+}
+
+._nav_menu_item > div:nth-child(1) > span{
+  @apply 
+  text-base text-gray-700;
+}
+
+._nav_menu_item > div:nth-child(1) > img{
+  @apply 
+  ml-2 h-[6px] transform transition-transform duration-300;
+}
+
+/* Sub Menu Box 1 Col */
+
+._nav_sub_menu_box_1_col {
+  @apply
+  absolute top-full invisible opacity-0 pt-4 w-80 z-10
+  transition-all duration-300 left-0 bg-white;
+}
+
+._nav_sub_menu_1_col {
+  @apply
+  flex flex-col border border-gray-200 rounded-md shadow p-2;
+}
+
+/* Sub Menu Box Grid 2 Cols */
+
+._nav_sub_menu_box_2_col {
+  @apply
+  absolute top-full invisible opacity-0 pt-4 w-[576px] z-10
+  transition-all duration-300 ease-in-out left-0 bg-white;
+}
+
+._nav_sub_menu_2_col {
+  @apply
+  grid grid-cols-2 border border-gray-200 rounded-md shadow p-2;
+}
+
+/* Sub Menu Item */
+
+._nav_sub_menu_item {
+  @apply
+  p-3 hover:bg-gray-100 hover:rounded-md;
+}
+
+._nav_sub_menu_item > a {
+  @apply
+  flex flex-row items-center;
+}
+
+._nav_sub_menu_item > a > img {
+  @apply
+  h-5 w-5;
+}
+
+._nav_sub_menu_item > a > span {
+  @apply
+  flex flex-col ml-3;
+}
+
+._nav_sub_menu_item > a > span > span:nth-child(1) {
+  @apply
+  text-lg font-bold;
+}
+
+._nav_sub_menu_item > a > span > span:nth-child(2) {
+  @apply
+  text-sm text-gray-700;
+}
+
+/* Navigation Extras */
+
+._nav_net {
+  @apply 
+  ml-auto flex items-center justify-self-end;
+}
+
+/* network */
+
+._nav_net_social {
+  @apply 
+  w-9 h-9 ml-2 justify-center items-center hidden relative
+  hover:border hover:border-yellow-500 hover:rounded-md 
+  border border-gray-200 rounded-md duration-300
+  lg:flex lg:flex-col;
+}
+
+._nav_net_social > img {
+  @apply
+  w-6;
+}
+
+._nav_net_social > span{
+  @apply
+  absolute top-12 bg-yellow-400 p-1 rounded-md text-xs font-bold
+  shadow-lg invisible transition duration-500 ease-in-out opacity-0;
+}
+
+/* Nav Networks Search */
+._nav_net_search {
+  @apply 
+  w-9 h-9 border-solid justify-center items-center hover:border
+  hover:border-yellow-500 border border-gray-200 rounded-md
+  hover:rounded-md hidden lg:flex ml-2 relative;
+}
+
+._nav_net_search > img {
+  @apply
+  w-6;
+}
+
+._nav_net_search > span {
+  @apply
+  absolute -bottom-10 bg-yellow-400 p-1 rounded-md text-xs font-bold
+  shadow-lg invisible opacity-0 transition duration-500 ease-in-out;
+}
+
+/* Nav Networks Contact */
+._nav_net_contact {
+  @apply
+  bg-yellow-400 border-none rounded-md ml-2 hidden lg:flex
+  lg:justify-center lg:items-center w-28 h-9 cursor-pointer
+  hover:bg-yellow-300 transition-all font-bold;
+}
+
+/* Nav Networks Mobile Button */
+._nav_mobile_button {
+  @apply 
+  w-9 h-9 ml-2 rounded-lg lg:hidden flex justify-center
+  items-center hover:bg-yellow-300 transition-all
+  bg-yellow-400;
+}
+
+._nav_mobile_button > img {
+  @apply
+  w-6;
+}
