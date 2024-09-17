@@ -86,7 +86,7 @@ export const productPropertiesDto: ProductPropertiesDto = {
   <section class="_product_container">
 
     <!-- Article -->
-    <article class="_product">
+    <article class="_product_article">
 
       <h1 class="_product_title">
         Tendal plegable y portable ahorrador de espacio.
@@ -100,11 +100,11 @@ export const productPropertiesDto: ProductPropertiesDto = {
       <!-- Product Figure -->
       <figure class="_product_figure">
 
-        <!-- Product Container Slider -->
+        <!-- Product Slider Container -->
         <div class="_product_slider_container" id="idProductSliderContainer">
-          <!-- Product Slide Inner -->
+          <!-- Slider Inner -->
           <div class="_slider_inner" id="idSliderInner">
-            <!-- Product Slide Img -->
+            <!-- Image Slide -->
             {
               productPropertiesDto.productProperties.productImgList.map(imgItem => (
                 <div class="_image_slide">
@@ -122,9 +122,12 @@ export const productPropertiesDto: ProductPropertiesDto = {
           </div>
         </div>
 
-        <!-- Buttons' Slider Navigation -->
+        <!-- Slider Nav -->
         <div class="_slider_nav">
-          <button class="_slide_buttons _prev_button" id="idPrevButton">
+          <button 
+            class="_slide_button _slide_button_disable _prev_button " 
+            id="idPrevButton"
+          >
             <img 
               src={productPropertiesDto.productProperties.prevButtonImg} 
               alt={productPropertiesDto.productProperties.prevButtonImgAlt}
@@ -133,12 +136,24 @@ export const productPropertiesDto: ProductPropertiesDto = {
           <!-- Dots Slider Container -->
           <div class="_dots_slider_container">
             {
-              productPropertiesDto.productProperties.productImgList.map(() => (
-                <div><div class="_dot_slider"></div></div>
-              ))
+              productPropertiesDto.productProperties.productImgList.map((_, index) => {
+                if(index === 0){
+                  return (
+                    <div><div class="_dot_enable"></div></div>
+                  )
+                }
+                else{
+                  return (
+                    <div><div class="_dot_disable"></div></div>
+                  )
+                }
+              })
             }
           </div>
-          <button class="_slide_buttons _next_button" id="idNextButton">
+          <button 
+            class="_slide_button _slide_button_enable _next_button" 
+            id="idNextButton"
+          >
             <img 
               src={productPropertiesDto.productProperties.nextButtonImg} 
               alt={productPropertiesDto.productProperties.nextButtonImgAlt} 

@@ -1,11 +1,13 @@
 /* Product Container */
+
 ._product_container {
   @apply
   flex flex-col items-center w-11/12 m-auto;
 }
 
 /* Article */
-._product{
+
+._product_article{
   @apply
   flex flex-col items-center w-full;
 }
@@ -16,6 +18,7 @@
 }
 
 /* Product Figure */
+
 ._product_figure{
   @apply
   flex flex-col items-center pt-5 pb-5;
@@ -28,7 +31,7 @@
   overflow-hidden w-full relative;
 }
 
-/* Product Slide Inner */
+/* Slider Inner */
 
 ._slider_inner{
   @apply
@@ -36,7 +39,8 @@
   ease-in-out;
 }
 
-/* Product Slide Img */
+/* Image Slide */
+
 ._image_slide{
   @apply
   flex-none w-full pt-2 pb-2 border-pink-300 
@@ -48,27 +52,31 @@
   m-auto;
 }
 
-/* Buttons' Slider Navigation */
+/* Slider Nav */
 
 ._slider_nav{
   @apply
   flex flex-row justify-center w-full p-2 items-center;
 }
 
-._slide_buttons{
+._slide_button{
   @apply
-  bg-pink-500 rounded-lg flex items-center
-  active:bg-pink-400;
+  rounded-lg flex items-center;
 }
 
-._slide_buttons > img{
+._slide_button > img{
   @apply
   w-3;
 }
 
-._disable_button_slider{
+._slide_button_disable{
   @apply
-  bg-gray-300 rounded-lg flex items-center;
+  bg-gray-300;
+}
+
+._slide_button_enable{
+  @apply
+  bg-pink-500 active:bg-pink-400;
 }
 
 ._disable_button_slider > img{
@@ -99,17 +107,18 @@
   p-[1px];
 }
 
-._dot_slider {
+._dot_disable {
   @apply
   bg-pink-200 rounded-full border w-3 h-3;
 }
 
-._slide_dots_current{
+._dot_enable{
   @apply
   bg-pink-400 rounded-full border w-3 h-3;
 }
 
 /* Buy in Amazon */
+
 ._product_buy_in_amazon{
   @apply
   bg-yellow-300 p-1 w-full rounded-xl text-center

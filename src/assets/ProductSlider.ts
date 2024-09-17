@@ -1,268 +1,377 @@
 /**
  * 
+ * @description
+ * 
+ * Estado que se quiere gestionar
  * 
  */
-enum productSliderComponentsEnum {
-  idProductSliderContainer = 'idProductSliderContainer',
-  idSliderInner = 'idSliderInner',
-  idPrevButton = 'idPrevButton',
-  idNextButton = 'idNextButton',
-  _imageSlideList = '._image_slide',
-  _dotSliderList = '._dot_slider',
+type ProductSliderStateType = {
+  sliderIndex: number;
+  sliderLength: number;
 }
 
 /**
  * 
+ * @description
+ * 
+ * Componentes que se esperan obtener para este script
  * 
  */
-function product_slider_components(): Map<string, HTMLElement | null>{
 
-  const components: Map<string, HTMLElement | null> = new Map();
+type ProductSliderComponentsType = {
+  idProductSliderContainer: HTMLDivElement;
+  idSliderInner: HTMLDivElement;
+  idPrevButton: HTMLButtonElement;
+  idNextButton: HTMLButtonElement;
+  imageSlideList: NodeListOf<HTMLDivElement>;
+  dotSliderList: NodeListOf<HTMLDivElement>;
+}
+
+class ProductSliderComponents{
+
+  private totalComponents: number;
+  private idProductSliderContainer: HTMLDivElement;
+  private idSliderInner: HTMLDivElement;
+  private idPrevButton: HTMLButtonElement;
+  private idNextButton: HTMLButtonElement;
+  private imageSlideList: NodeListOf<HTMLDivElement>;
+  private dotSliderList: NodeListOf<HTMLDivElement>;
+
+  constructor(){
+    this.totalComponents = 0;
+    this.idProductSliderContainer = document.createElement('div');
+    this.idSliderInner = document.createElement('div');
+    this.idPrevButton = document.createElement('button');
+    this.idNextButton = document.createElement('button');
+    this.imageSlideList = [] as unknown as NodeListOf<HTMLDivElement>;
+    this.dotSliderList = [] as unknown as NodeListOf<HTMLDivElement>;
+  }
+
+  setIdProductSliderContaner(
+    idProductSliderContainer: HTMLDivElement,
+  ): void{
+    this.totalComponents = this.totalComponents + 1;
+    this.idProductSliderContainer = idProductSliderContainer;
+  }
+
+  setIdSliderInner(
+    idSliderInner: HTMLDivElement,
+  ): void{
+    this.totalComponents = this.totalComponents + 1;
+    this.idSliderInner = idSliderInner;
+  }
+
+  setIdPrevButton(
+    idPrevButton: HTMLButtonElement,
+  ): void{
+    this.totalComponents = this.totalComponents + 1;
+    this.idPrevButton = idPrevButton;
+  }
+
+  setIdNextButton(
+    idNextButton: HTMLButtonElement,
+  ): void{
+    this.totalComponents = this.totalComponents + 1;
+    this.idNextButton = idNextButton;
+  }
+
+  setImageSlideList(
+    imageSlideList: NodeListOf<HTMLDivElement>,
+  ): void{
+    this.totalComponents = this.totalComponents + 1;
+    this.imageSlideList = imageSlideList;
+  }
+
+  setDotSliderList(
+    dotSliderList: NodeListOf<HTMLDivElement>,
+  ): void{
+    this.totalComponents = this.totalComponents + 1;
+    this.dotSliderList = dotSliderList;
+  }
+
+  getTotalComponents(): number{
+    return this.totalComponents;
+  }
+
+  getComponents(): ProductSliderComponentsType{
+    return {
+      idProductSliderContainer: this.idProductSliderContainer,
+      idSliderInner: this.idSliderInner,
+      idPrevButton: this.idPrevButton,
+      idNextButton: this.idNextButton,
+      imageSlideList: this.imageSlideList,
+      dotSliderList: this.dotSliderList,
+    }
+  }
+}
+
+
+/**
+ * 
+ * @description
+ * 
+ * Interfaz del Observer:
+ * Cada componente que quiera observar el estado debe implementarla
+ * 
+ */
+interface ProductSliderObserver {
+  update(state: ProductSliderStateType): void;
+}
+
+
+/**
+ * 
+ * @description
+ * 
+ * Clase que gestiona el estado y notifica a los observadores cuando
+ * hay algún cambio
+ * 
+ */
+class ProductSliderSubject{
+
+  private observers: ProductSliderObserver[];
+  private state: ProductSliderStateType;
+
+  constructor(sliderLength: number){
+    this.observers = [];
+    this.state = {
+      sliderIndex: 0,
+      sliderLength: sliderLength,
+    };
+  }
+
+  // subscribir a un observador
+  attach(observer: ProductSliderObserver): void{
+    this.observers.push(observer);
+  }
+
+  // notificar a los observadores cuando cambie el estado
+  notify(): void{
+    this.observers.forEach(observer => observer.update(this.state));
+  }
+
+  // modificar el estado y notificar a los observadores
+  increment(): void{
+    if(this.state.sliderIndex < (this.state.sliderLength - 1)){
+      const sliderIndex: number = this.state.sliderIndex + 1;
+      this.state = {...this.state, sliderIndex};
+      this.notify();
+    }
+  }
+
+  // modificar el estado y notificar a los observadores
+  decrement(): void{
+    if(this.state.sliderIndex > 0){
+      const sliderIndex: number = this.state.sliderIndex - 1;
+      this.state = {...this.state, sliderIndex};
+      this.notify();
+    }
+  }
+
+  // obtener el estado
+  getState(): ProductSliderStateType{
+    return this.state;
+  }
+}
+
+
+/**
+ * 
+ * @description
+ * 
+ * Clase que gestiona la lógica del componente
+ * 
+ */
+class NextButton implements ProductSliderObserver{
+
+  private state: ProductSliderStateType;
+  private idNextButton: HTMLButtonElement;
+
+  constructor(
+    state: ProductSliderStateType,
+    idNextButton: HTMLButtonElement,
+  ){
+    this.state = state;
+    this.idNextButton = idNextButton;
+  }
+
+  update(state: ProductSliderStateType): void {
+    this.state = state;
+    console.log(`idNextButton: He recibido el nuevo estado: ${this.state.sliderIndex}`);
+    if(this.state.sliderIndex === (this.state.sliderLength - 1)){
+      this.disableButton();
+    }
+    else{
+      this.enableButton();
+    }
+  }
+
+  enableButton(): void{
+    this.idNextButton.classList.remove('_slide_button_disable');
+    this.idNextButton.classList.add('_slide_button_enable');
+    this.idNextButton.disabled = false;
+  }
+
+  disableButton(): void{
+    this.idNextButton.classList.remove('_slide_button_enable');
+    this.idNextButton.classList.add('_slide_button_disable');
+    this.idNextButton.disabled = true;
+  }
+}
+
+
+/**
+ * 
+ * @description
+ * 
+ * Clase que gestiona la lógica del componente
+ * 
+ */
+class PrevButton implements ProductSliderObserver{
+
+  private state: ProductSliderStateType;
+  private idPrevButton: HTMLButtonElement;
+
+  constructor(
+    state: ProductSliderStateType,
+    idNextButton: HTMLButtonElement,
+  ){
+    this.state = state;
+    this.idPrevButton = idNextButton;
+  }
+
+  update(state: ProductSliderStateType): void {
+    this.state = state;
+    console.log(`idPrevButton: He recibido el nuevo estado: ${this.state.sliderIndex}`);
+  }
+}
+
+
+/**
+ * 
+ * @description
+ * 
+ * Clase que inicia el script del componente
+ * 
+ */
+class InitProductSlider {
+
+  private components: ProductSliderComponentsType;
+  private productSliderSubject: ProductSliderSubject;
+  private nextButton: NextButton;
+  private prevButton: PrevButton;
+
+  constructor(
+    components: ProductSliderComponentsType,
+  ){
+
+    // components
+    this.components = components;
+
+    // state
+    this.productSliderSubject = new ProductSliderSubject(
+      this.components.imageSlideList.length,
+    );
+
+    // NextButton
+    this.nextButton = new NextButton(
+      this.productSliderSubject.getState(),
+      this.components.idNextButton,
+    );
+
+    // PrevButton
+    this.prevButton = new PrevButton(
+      this.productSliderSubject.getState(),
+      this.components.idPrevButton,
+    );
+  }
+
+  getComponents(): ProductSliderComponentsType{
+    return this.components;
+  }
+
+  getProductSliderSubject(): ProductSliderSubject{
+    return this.productSliderSubject;
+  }
+
+  getNextButton(): NextButton{
+    return this.nextButton;
+  }
+
+  getPrevButton(): PrevButton{
+    return this.prevButton;
+  }
+}
+
+
+/**
+ * 
+ * @description
+ * 
+ * Inicio del script cuando carga el documento html
+ * 
+ */
+document.addEventListener('DOMContentLoaded', () => {
   
-  //
-  const idProductSliderContainer: HTMLElement | null = 
-    document.getElementById(
-      productSliderComponentsEnum.idProductSliderContainer
-    );
-  components.set(
-    productSliderComponentsEnum.idProductSliderContainer, 
-    idProductSliderContainer
-  );
-
-  //
-  const idSliderInner: HTMLElement | null = 
-    document.getElementById(
-      productSliderComponentsEnum.idSliderInner
-    );
-  components.set(
-    productSliderComponentsEnum.idSliderInner, 
-    idSliderInner);
-
-  //
-  const idPrevButton: HTMLElement | null = 
-    document.getElementById(
-      productSliderComponentsEnum.idPrevButton
-  );
-  components.set(
-    productSliderComponentsEnum.idPrevButton, 
-    idPrevButton
-  );
-
-  //
-  const idNextButton: HTMLElement | null = 
-    document.getElementById(
-      productSliderComponentsEnum.idNextButton
-    );
-  components.set(
-    productSliderComponentsEnum.idNextButton, 
-    idNextButton
-  );
-
-  //
-  return components;
-}
-
-/**
- * 
- * 
- */
-function validate_product_slider_components(
-  components: Map<string, HTMLElement | null>,
-): boolean{
-  let validate: boolean = true;
-  for(const [_, value] of components.entries()){
-    validate = validate && (value !== null);
-  }
-  return validate;
-}
-
-/**
- * 
- * 
- */
-function addClassList(component: HTMLElement, classList: string[]): void{
-  if(classList.length > 0){
-    classList.map(cssClass => {
-      component.classList.add(cssClass);
-    })
-  }
-}
-
-/**
- * 
- * 
- */
-function removeClassList(component: HTMLElement, classList: string[]): void{
-  if(classList.length > 0){
-    classList.map(cssClass => {
-      component.classList.remove(cssClass)
-    });
-  }
-}
-
-/**
- * 
- * 
- */
-type SliderStateType = {
-  getIndex: () => number,
-  increment: () => number,
-  decrement: () => number,
-}
-
-function sliderState(initValue: number): SliderStateType{
-  let index: number = initValue;
-
-  const increment = () => {
-    index = index + 1;
-    return index;
-  };
-
-  const decrement = () => {
-    index = index -1;
-    return index;
-  }
-
-  return{
-    getIndex: () => index,
-    increment: increment,
-    decrement: decrement,
-  }
-}
-
-/**
- * 
- * 
- */
-function init_product_slider(): void{
-
-  // test
-  console.log(product_slider_components());
-
-  // state
-  let indexSliderState: number = 0; 
-
   // html components
-  const idProductSliderContainer: HTMLDivElement | null = document.getElementById('idProductSliderContainer') as HTMLDivElement;
-  const idSliderInner: HTMLDivElement | null = document.getElementById('idSliderInner') as HTMLDivElement;
-  const _imageSlideList: NodeListOf<HTMLDivElement> = document.querySelectorAll('._image_slide');
-  const idPrevButton: HTMLButtonElement | null = document.getElementById('idPrevButton') as HTMLButtonElement;
-  const idNextButton: HTMLButtonElement | null = document.getElementById('idNextButton') as HTMLButtonElement;
-  const _dotSliderList: NodeListOf<HTMLDivElement> = document.querySelectorAll('._dot_slider');
+  const idProductSliderContainer: HTMLElement | null = document.getElementById('idProductSliderContainer');
+  const idSliderInner: HTMLElement | null = document.getElementById('idSliderInner');
+  const idPrevButton: HTMLElement | null = document.getElementById('idPrevButton');
+  const idNextButton: HTMLElement | null = document.getElementById('idNextButton');
+  const imageSlideList: NodeListOf<HTMLDivElement> = document.querySelectorAll('._image_slide');
+  const dotSliderList: NodeListOf<HTMLDivElement> = document.querySelectorAll('._dots_slider_container > div > div');
 
-  // list of slider items
-  const totalItems: number = _imageSlideList.length;
+  // components
+  const htmlComponents = new ProductSliderComponents();
 
-  // init prev button - init slide dots
-  if(indexSliderState === 0 && idPrevButton !== null){
-    idPrevButton.classList.remove('_slide_buttons');
-    idPrevButton.classList.add('_disable_button_slider');
-    idPrevButton.disabled = true;
-    slideDotCurrent(_dotSliderList[indexSliderState]);
+  if(idProductSliderContainer !== null){
+    htmlComponents.setIdProductSliderContaner(
+      idProductSliderContainer as HTMLDivElement,
+    );
   }
 
-  // add events to both buttons
-  if(idPrevButton !== null && idNextButton !== null){
-    idPrevButton.addEventListener('click', () => prevSlide());
-    idNextButton.addEventListener('click', () => nextSlide());
+  if(idSliderInner !== null){
+    htmlComponents.setIdSliderInner(
+      idSliderInner as HTMLDivElement,
+    );
   }
 
-  /**
-   * 
-   * 
-   */
-  function moveToIndex(index: number): void{
-    if(idProductSliderContainer !== null && idSliderInner !== null){
-      const newTransform = -idProductSliderContainer.offsetWidth * index;
-      idSliderInner.style.transform = `translateX(${newTransform}px)`;
-    }
+  if(idPrevButton !== null){
+    htmlComponents.setIdPrevButton(
+      idPrevButton as HTMLButtonElement,
+    );
   }
 
-  /**
-   * 
-   * 
-   */
-  function slideDotCurrent($slideDot: HTMLDivElement): void{
-    $slideDot.classList.remove('_dot_slider');
-    $slideDot.classList.add('_slide_dots_current');
+  if(idNextButton !== null){
+    htmlComponents.setIdNextButton(
+      idNextButton as HTMLButtonElement,
+    );
   }
 
-  /**
-   * 
-   * 
-   */
-  function slideDotNormal($slideDot: HTMLDivElement): void{
-    $slideDot.classList.remove('_slide_dots_current');
-    $slideDot.classList.add('_dot_slider');
+  if(imageSlideList.length > 0){
+    htmlComponents.setImageSlideList(
+      imageSlideList,
+    );
   }
 
-  /**
-   * 
-   * 
-   */
-  function disableButtonSlide($button: HTMLButtonElement): void{
-    $button.classList.remove('_slide_buttons');
-    $button.classList.add('_disable_button_slider');
-    $button.disabled = true;
+  if(dotSliderList.length > 0){
+    htmlComponents.setDotSliderList(
+      dotSliderList,
+    );
   }
 
-  /**
-   * 
-   * 
-   */
-  function enableButtonSlide($button: HTMLButtonElement): void{
-    $button.classList.remove('_disable_button_slider');
-    $button.classList.add('_slide_buttons');
-    $button.disabled = false;
-  }
-    
-  /**
-   * 
-   * 
-   */
-  function prevSlide(): void{
+  if(htmlComponents.getTotalComponents() === 6){
 
-    slideDotNormal(_dotSliderList[indexSliderState]);
-    indexSliderState = indexSliderState - 1;
-    slideDotCurrent(_dotSliderList[indexSliderState]);
+    const components: ProductSliderComponentsType = htmlComponents.getComponents();
+    const initProductSlider = new InitProductSlider(components);
+    const subject = initProductSlider.getProductSliderSubject();
+    const nextButton = initProductSlider.getNextButton();
+    const prevButton = initProductSlider.getPrevButton();
+    subject.attach(nextButton);
+    subject.attach(prevButton);
 
-    if(indexSliderState === 0 && idPrevButton !== null){
-      disableButtonSlide(idPrevButton);
-    }
-    else if(indexSliderState === (totalItems - 1) && idNextButton !== null){
-      disableButtonSlide(idNextButton);
-    }
-    else{
-      idPrevButton !== null && enableButtonSlide(idPrevButton);
-      idNextButton !== null && enableButtonSlide(idNextButton);
-    }
-
-    moveToIndex(indexSliderState);
+    components.idNextButton.addEventListener('click', () => subject.increment());
+    components.idPrevButton.addEventListener('click', () => subject.decrement());
   }
 
-  /**
-   * 
-   * 
-   */
-  function nextSlide(): void{
-
-    slideDotNormal(_dotSliderList[indexSliderState]);
-    indexSliderState = indexSliderState + 1;
-    slideDotCurrent(_dotSliderList[indexSliderState]);
-
-    if(indexSliderState === 0 && idPrevButton !== null){
-      disableButtonSlide(idPrevButton);
-    }
-    else if(indexSliderState === (totalItems - 1) && idNextButton !== null){
-      disableButtonSlide(idNextButton);
-    }
-    else{
-      idPrevButton !== null && enableButtonSlide(idPrevButton);
-      idNextButton !== null && enableButtonSlide(idNextButton);
-    }
-
-    moveToIndex(indexSliderState);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', init_product_slider);
+});
