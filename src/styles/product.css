@@ -2,40 +2,59 @@
 
 ._product_container {
   @apply
-  flex flex-col items-center w-11/12 m-auto;
+  flex
+  flex-col
+  items-center
+  w-11/12
+  m-auto;
 }
 
 /* Article */
 
 ._product_article{
   @apply
-  flex flex-col items-center w-full;
+  flex
+  flex-col
+  items-center
+  w-full;
 }
 
 ._product_title{
   @apply
-  font-bold text-xl mt-3 mb-3;
+  font-bold
+  text-xl
+  mt-3
+  mb-3;
 }
 
 /* Product Figure */
 
 ._product_figure{
   @apply
-  flex flex-col items-center pt-5 pb-5;
+  flex
+  flex-col
+  items-center
+  pt-5
+  pb-5;
 }
 
 /* Product Slider Container */
 
 ._product_slider_container{
   @apply
-  overflow-hidden w-full relative;
+  overflow-hidden
+  w-full
+  relative;
 }
 
 /* Slider Inner */
 
 ._slider_inner{
   @apply
-  flex w-full transition-transform duration-500 
+  flex
+  w-full
+  transition-transform
+  duration-500 
   ease-in-out;
 }
 
@@ -43,8 +62,13 @@
 
 ._image_slide{
   @apply
-  flex-none w-full pt-2 pb-2 border-pink-300 
-  border-t border-b;
+  flex-none
+  w-full
+  pt-2
+  pb-2
+  border-pink-300 
+  border-t
+  border-b;
 }
 
 ._image_slide > img {
@@ -56,12 +80,19 @@
 
 ._slider_nav{
   @apply
-  flex flex-row justify-center w-full p-2 items-center;
+  flex
+  flex-row
+  justify-center
+  w-full
+  p-2
+  items-center;
 }
 
 ._slide_button{
   @apply
-  rounded-lg flex items-center;
+  rounded-lg
+  flex
+  items-center;
 }
 
 ._slide_button > img{
@@ -76,7 +107,8 @@
 
 ._slide_button_enable{
   @apply
-  bg-pink-500 active:bg-pink-400;
+  bg-pink-500
+  active:bg-pink-400;
 }
 
 ._disable_button_slider > img{
@@ -86,12 +118,18 @@
 
 ._prev_button{
   @apply
-  pl-2 pt-2 pb-2 pr-3;
+  pl-2
+  pt-2
+  pb-2
+  pr-3;
 }
 
 ._next_button{
   @apply
-  pl-3 pt-2 pb-2 pr-2;
+  pl-3
+  pt-2
+  pb-2
+  pr-2;
 }
 
 
@@ -99,7 +137,9 @@
 
 ._dots_slider_container {
   @apply
-  ml-2 mr-2 flex;
+  ml-2
+  mr-2
+  flex;
 }
 
 ._dots_slider_container > div{
@@ -109,20 +149,33 @@
 
 ._dot_disable {
   @apply
-  bg-pink-200 rounded-full border w-3 h-3;
+  bg-pink-200
+  rounded-full
+  border w-3 h-3;
 }
 
 ._dot_enable{
   @apply
-  bg-pink-400 rounded-full border w-3 h-3;
+  bg-pink-400
+  rounded-full
+  border
+  w-3
+  h-3;
 }
 
 /* Buy in Amazon */
 
 ._product_buy_in_amazon{
   @apply
-  bg-yellow-300 p-1 w-full rounded-xl text-center
-  text-sm font-bold hover:bg-yellow-400 transition
+  bg-yellow-300
+  p-1
+  w-full
+  rounded-xl
+  text-center
+  text-sm
+  font-bold
+  hover:bg-yellow-400
+  transition
   duration-300;
 }
 
@@ -135,22 +188,30 @@
 
 ._product_information_table > tbody > tr:nth-child(1){
   @apply
-  border-gray-300 border-t border-b;
+  border-gray-300
+  border-t
+  border-b;
 }
 
 ._product_information_row{
   @apply
-  border-b border-gray-300 text-sm;
+  border-b
+  border-gray-300
+  text-sm;
 }
 
 ._product_information_rating{
   @apply
-  flex flex-row items-center;
+  flex
+  flex-row
+  items-center;
 }
 
 ._product_information_rating > img{
   @apply
-  w-4 h-4 ml-1;
+  w-4
+  h-4
+  ml-1;
 }
 
 ._product_information_row > td:nth-child(1){
@@ -160,5 +221,7 @@
 
 ._product_information_row > td {
   @apply
-  pl-2 pt-1 pb-1;
+  pl-2
+  pt-1
+  pb-1;
 }
